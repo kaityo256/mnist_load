@@ -4,14 +4,15 @@
 
 static uint8_t train_label[60000];
 static uint8_t test_label[10000];
-static uint8_t test_data[10000][28][28];
 static uint8_t train_data[60000][28][28];
+static uint8_t test_data[10000][28][28];
 
 void show() {
   for (int i = 0; i < 10; i++) {
+    printf("label = %d\n", test_label[i]);
     for (int ix = 0; ix < 28; ix++) {
       for (int iy = 0; iy < 28; iy++) {
-        if (train_data[i][ix][iy] > 128) {
+        if (test_data[i][ix][iy] > 128) {
           printf("*");
         } else {
           printf(" ");
@@ -34,5 +35,7 @@ void load_file(const char *filename, char *data) {
 int main() {
   load_file("mnist_train_data.dat", reinterpret_cast<char *>(train_data));
   load_file("mnist_train_label.dat", reinterpret_cast<char *>(train_label));
+  load_file("mnist_test_data.dat", reinterpret_cast<char *>(test_data));
+  load_file("mnist_test_label.dat", reinterpret_cast<char *>(test_label));
   show();
 }
