@@ -7,12 +7,13 @@ static uint8_t test_label[10000];
 static uint8_t train_data[60000][28][28];
 static uint8_t test_data[10000][28][28];
 
-void show() {
+template <size_t N>
+void show(uint8_t (&data)[N][28][28], uint8_t (&label)[N]) {
   for (int i = 0; i < 10; i++) {
-    printf("label = %d\n", test_label[i]);
+    printf("label = %d\n", label[i]);
     for (int ix = 0; ix < 28; ix++) {
       for (int iy = 0; iy < 28; iy++) {
-        if (test_data[i][ix][iy] > 128) {
+        if (data[i][ix][iy] > 128) {
           printf("*");
         } else {
           printf(" ");
@@ -37,5 +38,8 @@ int main() {
   load_file("mnist_train_label.dat", reinterpret_cast<char *>(train_label));
   load_file("mnist_test_data.dat", reinterpret_cast<char *>(test_data));
   load_file("mnist_test_label.dat", reinterpret_cast<char *>(test_label));
-  show();
+  printf("Dump Training data\n");
+  show(train_data, train_label);
+  printf("Dump Test data\n");
+  show(test_data, test_label);
 }
