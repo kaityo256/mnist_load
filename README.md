@@ -1,4 +1,4 @@
-# Sample of dumping MNIST data and reading it in C++
+# Sample of dumping MNIST data by Python and reading it from C++
 
 ## Preparing a Python virtual environment
 
@@ -12,7 +12,11 @@ python3 -m pip install tensorflow
 ## Dump MNIST data to file
 
 ```sh
-python3 dump.py
+$ python3 dump.py
+Dumped as mnist_train_data.dat
+Dumped as mnist_train_label.dat
+Dumped as mnist_test_data.dat
+Dumped as mnist_test_label.dat
 ```
 
 ## Load from C++
