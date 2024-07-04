@@ -2,18 +2,21 @@
 #include <fstream>
 #include <iostream>
 
+const int n_size = 28;
+const int n_pixels = n_size * n_size;
+
 static uint8_t train_label[60000];
 static uint8_t test_label[10000];
-static uint8_t train_data[60000][28][28];
-static uint8_t test_data[10000][28][28];
+static uint8_t train_data[60000][n_pixels];
+static uint8_t test_data[10000][n_pixels];
 
 template <size_t N>
-void show(uint8_t (&data)[N][28][28], uint8_t (&label)[N]) {
+void show(uint8_t (&data)[N][n_pixels], uint8_t (&label)[N]) {
   for (int i = 0; i < 10; i++) {
     printf("label = %d\n", label[i]);
-    for (int ix = 0; ix < 28; ix++) {
-      for (int iy = 0; iy < 28; iy++) {
-        if (data[i][ix][iy] > 128) {
+    for (int ix = 0; ix < n_size; ix++) {
+      for (int iy = 0; iy < n_size; iy++) {
+        if (data[i][ix * n_size + iy] > 128) {
           printf("*");
         } else {
           printf(" ");
@@ -23,7 +26,6 @@ void show(uint8_t (&data)[N][28][28], uint8_t (&label)[N]) {
     }
   }
 }
-
 void load_file(const char *filename, char *data) {
   std::ifstream file(filename, std::ios::binary);
   file.seekg(0, std::ios::end);
