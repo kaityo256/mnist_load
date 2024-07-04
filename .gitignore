@@ -1,0 +1,4 @@
+*.dat
+myenv
+.vscode
+a.out
