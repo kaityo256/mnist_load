@@ -1,4 +1,4 @@
 *.dat
-myenv
+.venv
 .vscode
 a.out
